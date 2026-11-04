@@ -1,56 +1,64 @@
 <?php
-$tickets = [
-    ['id' => 1, 'title' => 'Printer offline', 'priority' =>
-'high', 'status' => 'open'],
-    ['id' => 2, 'title' => 'Password reset', 'priority' =>
-'low', 'status' => 'resolved'],
-    ['id' => 3, 'title' => 'Server unreachable', 'priority' =>
-'urgent', 'status' => 'open'],
-    ['id' => 4, 'title' => 'Software installation', 'priority' =>
-'medium', 'status' => 'in progress'],
-    ['id'=> 5, 'title'=> 'HA', 'priority'=>
-'high', 'status'=> 'open'],
-    ['id'=> 6, 'title'=> 'HAH', 'priority'=>
-'low', 'status'=> 'resolved'],
-    ['id'=> 7, 'title'=> 'HAHAAAAAA', 'priority'=>
-'urgent', 'status'=> 'open'],
-    ['id'=> 8, 'title'=> 'HAHAA', 'priority'=>
-'medium', 'status'=> 'in progress'],
-];
+require __DIR__ . '/includes/auth.php';
+requireLogin();
+require __DIR__ . '/includes/db.php';
 
-$allowed = ['low', 'medium', 'high', 'urgent'];
-$priority = $_GET['priority'] ?? '';
+$allowed = ['open', 'in_progress', 'resolved'];
+$status = $_GET['status'] ?? 'open';
+if (!in_array($status, $allowed, true)) { $status = 'open';}
 
-if ($priority && in_array($priority, $allowed)) {
-    $tickets = array_filter($tickets, function($ticket) use ($priority) {
-        return $ticket['priority'] === $priority;
-    });
-}
+$stmt = $pdo->prepare("SELECT id, title, priority, status FROM tickets WHERE status = ? ORDER BY created_at DESC");
+$stmt -> execute([$status]);
+$tickets = $stmt->fetchAll();
+
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Tickets</title></head>
+<head>
+    <meta charset="UTF-8"><title>Tickets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-<h1>Tickets</h1>
+    <h1>Tickets</h1>
 
-<p>Filter:
-    <a href="tickets.php">All</a> |
-    <a href="tickets.php?priority=high">High</a> |
-    <a href="tickets.php?priority=urgent">Urgent</a>
-</p>
+    <p>Filter:
+        <a href="tickets.php">All</a> |
+        <a href="tickets.php?priority=high">High</a> |
+        <a href="tickets.php?priority=urgent">Urgent</a>
+    </p>
 
-<table>
-    <tr><th>ID</th><th>Title</th><th>Priority</th><th>Status</th></tr>
-    <?php foreach ($tickets as $ticket): ?>
-        <tr>
-            <td><?= htmlspecialchars($ticket['id']) ?></td>
-            <td><?= htmlspecialchars($ticket['title']) ?></td>
-            <td><?= htmlspecialchars($ticket['priority']) ?></td>
-            <td><?= htmlspecialchars($ticket['status']) ?></td>
-        </tr>
-<?php endforeach; ?>
-
-</table>
+    <table>
+        <tr><th>ID</th><th>Title</th><th>Priority</th><th>Status</th></tr>
+        <?php foreach ($tickets as $ticket): ?>
+            <tr>
+                <td><?= htmlspecialchars($ticket['id']) ?></td>
+                <td><?= htmlspecialchars($ticket['title']) ?></td>
+                <td><?= htmlspecialchars($ticket['priority']) ?></td>
+                <td><?= htmlspecialchars($ticket['status']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        <td>
+            <form method="post" action="update_status.php">
+                <input type="hidden" name="id" value="<?= (int)$ticket['id'] ?>">
+                <select name="status">
+                    <option value="open">Open</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="resolved">Resolved</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+            <form method="post" action="delete_ticket.php">
+                <input type="hidden" name="id" value="<?= (int) $ticket['id'] ?>">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </table>
+    <script>
+        fetch("api_tickets.php")
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error("Network problem:", error));
+    </script>
 </body>
 </html>

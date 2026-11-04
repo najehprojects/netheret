@@ -16,13 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!in_array($priority, $validPriorities, true)) {
         $errors[] = "Please choose a valid priority.";
     }
-    if (empty($errors)) {
-        // Saving to the database comes in the CRUD task
-        http_response_code(201);
-        echo "Ticket logged";
-        exit;
-    }
-    http_response_code(400);
+    
+    require __DIR__ . '/includes/db.php';
+    $stmt = $pdo->prepare("INSERT INTO tickets (title, description, priority) VALUES (?, ?, ?)");
+    $stmt -> execute([$title, $description, $priority]);
+    header('Location: tickets.php');
+    exit;
+    
 }
 ?>
 

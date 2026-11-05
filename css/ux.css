@@ -1,0 +1,26 @@
+.ticket-card {
+  border: 1px solid #767676;
+  border-radius: 6px;
+  padding: 1rem;
+  /* TODO 2: add a transition on box-shadow and transform, 0.2s ease */
+}
+/* TODO 3: on hover, add a soft shadow and lift the card up by 2px
+   hint: box-shadow: 0 4px 12px rgba(0,0,0,.2); transform: translateY(-2px); */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+.toast {
+  /* TODO 4: apply the fade-in animation, 0.3s */
+}
+
+/* TODO 5: users who ask their device for less motion should see no animation or transition */
+@media (prefers-reduced-motion: reduce) {
+  .ticket-card {
+    transition: none;
+  }
+  .toast {
+    animation: none;
+  }
+}

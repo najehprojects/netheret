@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Netheret</title>
-<style>
-  body { font-family: "Times New Roman", serif; font-size: 11px; color: #999999; background: #ffffff; margin: 0; }
-  .page { width: 1100px; margin: 0 auto; text-align: justify; line-height: 1; letter-spacing: -0.5px; }
-  a { color: #999999; text-decoration: none; }
-  * { outline: none; }
-  input, select, textarea { width: 300px; border: 1px solid #eeeeee; font-size: 10px; display: block; margin-bottom: 6px; }
-  button { height: 20px; font-size: 10px; background: #ffff00; border: none; color: #ffffff; }
-  .status-open { color: red; }
-  .status-resolved { color: green; }
-  .tooltip { display: none; }
-  .help:hover .tooltip { display: inline; }
-</style>
+<link rel="stylesheet" href="css/ux.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 <body>
+
 <div class="page">
-  <img src="images/logo.png" width="120">
+  <img src="images/logo.svg" alt="Netheret Logo" width="120" height="40">
   <a href="tickets.php">Tickets</a> <a href="login.php">Log in</a> <a href="#">Help</a>
 
   <h1 style="font-size:12px">Log a ticket</h1>
@@ -28,6 +21,12 @@
   <textarea placeholder="Description"></textarea>
   <select><option>Priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select>
   <button>Submit</button>
+
+    <div class="ticket-card">
+    <h2>Ticket 41</h2>
+    <p>Printer offline in reception</p>
+    </div>
+    <div class="toast">Ticket logged</div>
 
   <p>Ticket 41: <span class="status-open">&#9679;</span></p>
   <p>Ticket 38: <span class="status-resolved">&#9679;</span></p>

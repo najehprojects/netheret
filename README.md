@@ -1,6 +1,6 @@
 # Netheret Support Prototype
 ## What it is
-(one sentence)
+This is a website for my school project.
 ## Requirements
 - XAMPP (PHP 8.x, MySQL)
 - A modern browser

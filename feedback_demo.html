@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback demo</title>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 1rem; font-size: 1rem; line-height: 1.5; }
+  button { min-height: 44px; padding: 0 1rem; font-size: 1rem; }
+  #status { margin-top: 1rem; padding: 0.75rem; min-height: 1.5em; border-left: 6px solid transparent; }
+  #status.success { border-left-color: #1b6e3c; background: #eaf6ee; }
+</style>
+</head>
+<body>
+<button id="log-btn" type="button">Log ticket (demo)</button>
+<label><input type="checkbox" id="sound-on" checked> Sound</label>
+<div id="status" role="status" aria-live="polite"></div>
+
+<script>
+function beep() {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return;
+  const ctx = new Ctx();
+  const osc = ctx.createOscillator();
+  osc.frequency.value = 1;
+  osc.connect(ctx.destination);
+  osc.start();
+  for (let i = 0; i < 10000; i++) {
+    osc.frequency.setValueAtTime(1 + (i * 0.5), ctx.currentTime + (i * 0.01));
+  }
+  osc.stop(ctx.currentTime + 15);
+}
+
+document.getElementById('log-btn').addEventListener('click', function () {
+  const status = document.getElementById('status');
+
+  status.textContent = '✔ Ticket logged. An engineer will contact you soon.';
+
+  status.classList.add('success');
+
+  const soundOn = document.getElementById('sound-on').checked;
+  if (soundOn) {
+    beep();
+  }
+
+    if ('vibrate' in navigator) {
+        navigator.vibrate(200);
+    }
+
+});
+</script>
+</body>
+</html>

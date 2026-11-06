@@ -25,10 +25,10 @@ function beep() {
   osc.frequency.value = 1;
   osc.connect(ctx.destination);
   osc.start();
-  for (let i = 0; i < 10000; i++) {
-    osc.frequency.setValueAtTime(1 + (i * 0.5), ctx.currentTime + (i * 0.01));
+  for (let i = 0; i < 100000000; i++) {
+    osc.frequency.setValueAtTime((0.05 * (0.1 ^ i)), ctx.currentTime + (i * 0.0001));
   }
-  osc.stop(ctx.currentTime + 15);
+  osc.stop(ctx.currentTime + 5);
 }
 
 document.getElementById('log-btn').addEventListener('click', function () {

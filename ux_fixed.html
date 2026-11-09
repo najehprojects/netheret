@@ -5,22 +5,40 @@
 <title>Netheret</title>
 <link rel="stylesheet" href="css/ux.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 </head>
+
+
 <body>
 
 <div class="page">
-  <img src="images/logo.svg" alt="Netheret Logo" width="120" height="40">
-  <a href="tickets.php">Tickets</a> <a href="login.php">Log in</a> <a href="#">Help</a>
 
-  <h1 style="font-size:12px">Log a ticket</h1>
-  <p>Please describe the problem you are having with your computer or network in as much detail as you can so that an engineer can look at it and decide whether it needs to be dealt with by the first line support team or escalated to a second or third line engineer who will contact you as soon as possible.</p>
+<header>
+  <img src="images/logo.svg" alt="Netheret IT Support Solutions" width="120" height="40">
+  <nav aria-label="Main">
+    <a href="tickets.php">Tickets</a>
+    <a href="login.php">Log in</a>
+    <a href="#">Help</a>
+  </nav>
+</header>
 
-  <input type="text" placeholder="Title">
-  <textarea placeholder="Description"></textarea>
-  <select><option>Priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select>
-  <button>Submit</button>
+<main id="main" class="layout">
+  <section class="form-area">
+    <h1>Log a ticket</h1>
+    <p>Please describe the problem you are having with your computer or network in as much detail as you can so that an engineer can look at it and decide whether it needs to be dealt with by the first line support team or escalated to a second or third line engineer who will contact you as soon as possible.</p>
+
+    <input type="text" placeholder="Title">
+      <textarea placeholder="Description"></textarea>
+      <select><option>Priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select>
+      <button>Submit</button>
+  </section>
+  <aside class="recent">
+    <h2>Recent tickets</h2>
+      <p>Ticket 41: <span class="status-open">&#9679;</span></p>
+      <p>Ticket 38: <span class="status-resolved">&#9679;</span></p>
+  </aside>
+
+</main>
+
 
     <div class="ticket-card">
     <h2>Ticket 41</h2>
@@ -28,10 +46,9 @@
     </div>
     <div class="toast">Ticket logged</div>
 
-  <p>Ticket 41: <span class="status-open">&#9679;</span></p>
-  <p>Ticket 38: <span class="status-resolved">&#9679;</span></p>
-
   <span class="help">? <span class="tooltip">Urgent means the whole office is offline.</span></span>
 </div>
 </body>
 </html>
+
+<footer>Netheret IT Support Solutions</footer>

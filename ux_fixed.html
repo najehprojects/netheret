@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Netheret</title>
-<link rel="stylesheet" href="css/ux.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/ux.css">
+<title>Netheret</title>
 </head>
-
-
 <body>
-
 <div class="page">
-
-<header>
-  <img src="images/logo.svg" alt="Netheret IT Support Solutions" width="120" height="40">
+ <img src="images/logo.svg" alt="Netheret IT Support Solutions" width="120" height="40">
   <nav aria-label="Main">
     <a href="tickets.php">Tickets</a>
     <a href="login.php">Log in</a>
     <a href="#">Help</a>
   </nav>
-</header>
 
 <main id="main" class="layout">
   <section class="form-area">
@@ -27,28 +21,24 @@
     <p>Please describe the problem you are having with your computer or network in as much detail as you can so that an engineer can look at it and decide whether it needs to be dealt with by the first line support team or escalated to a second or third line engineer who will contact you as soon as possible.</p>
 
     <input type="text" placeholder="Title">
-      <textarea placeholder="Description"></textarea>
-      <select><option>Priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select>
-      <button>Submit</button>
+    <textarea placeholder="Description"></textarea>
+    <select><option>Priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select>
+    <button>Submit</button>
+
+    <p>Ticket 41: <span class="status-open">▲ Open</span></p>
+    <p>Ticket 38: <span class="status-resolved">✔ Resolved</span></p>
+    <span class="help">? <span class="tooltip">Urgent means the whole office is offline.</span></span>
   </section>
   <aside class="recent">
     <h2>Recent tickets</h2>
-      <p>Ticket 41: <span class="status-open">&#9679;</span></p>
-      <p>Ticket 38: <span class="status-resolved">&#9679;</span></p>
-  </aside>
-
-</main>
-
-
     <div class="ticket-card">
-    <h2>Ticket 41</h2>
-    <p>Printer offline in reception</p>
+      <h2>Ticket 41</h2>
+      <p>Printer offline in reception</p>
     </div>
     <div class="toast">Ticket logged</div>
-
-  <span class="help">? <span class="tooltip">Urgent means the whole office is offline.</span></span>
-</div>
-</body>
-</html>
+  </aside>
+</main>
 
 <footer>Netheret IT Support Solutions</footer>
+</body>
+</html>

@@ -2,27 +2,27 @@
   border: 1px solid #767676;
   border-radius: 6px;
   padding: 1rem;
-  /* TODO 2: add a transition on box-shadow and transform, 0.2s ease */
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-/* TODO 3: on hover, add a soft shadow and lift the card up by 2px
-   hint: box-shadow: 0 4px 12px rgba(0,0,0,.2); transform: translateY(-2px); */
+.ticket-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+    transform: translateY(-2px);
+}
 
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
 .toast {
-  animation: fade-in 0.3s;
+  animation: fade-in 0.3s ease;
 }
 
 /* TODO 5: users who ask their device for less motion should see no animation or transition */
 @media (prefers-reduced-motion: reduce) {
-  .ticket-card {
-    transition: none;
-  }
-  .toast {
-    animation: none;
-  }
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 
 .kpis { 
@@ -51,4 +51,100 @@ th, td {
     border: 1px solid #767676; 
     padding: 0.5rem 0.75rem; 
     text-align: left; 
+}
+
+:root {
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+ 
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;/* one column on phones */
+  gap: var(--space-4);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+/* TODO 1: from 768px wide upwards, use two columns: the form twice as wide as the sidebar */
+@media (min-width: 768px) {
+  .layout{
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+header {
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    gap: var(--space-3); 
+    padding: var(--space-3) var(--space-4); 
+}
+/* TODO 2: give label + input pairs space: each label displays as a block with margin-top var(--space-3) */
+label {
+  display: block;
+  margin-top: var(--space-3);
+}
+
+body {
+  color: var(--text);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 { font-size: 2rem;   line-height: 1.2; }
+h2 { font-size: 1.5rem; line-height: 1.3; }
+
+p {
+  text-align: left;
+  letter-spacing: normal;
+  max-width: 65ch;
+}
+
+label, input, select, textarea, button {
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+:root{
+  --brand-primary: #0056b3;   /* about 7:1 on white */
+  --brand-accent:  #b45309;   /* about 5:1 on white */
+  --text:          #1a1a1a;
+  --text-muted:    #595959;   /* about 7:1 on white */
+  --border:        #767676;   /* about 4.5:1 on white, OK for UI parts */
+  --error:         #b00020;   /* about 7:1 on white */
+  --success:       #1b6e3c;   /* about 6:1 on white */
+}
+
+.status-open     { 
+  color: var(--error); 
+  font-weight: 600; 
+}
+.status-resolved { 
+  color: var(--success); 
+  font-weight: 600; 
+}
+
+a {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button {
+  background: var(--brand-primary);
+  color: #ffffff;
+  min-height: 44px;
+  border: none;
+  padding: 0 1rem;
+}
+
+input, select, textarea{
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 30rem;
 }
